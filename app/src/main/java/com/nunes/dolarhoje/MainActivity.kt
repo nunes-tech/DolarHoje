@@ -1,10 +1,16 @@
 package com.nunes.dolarhoje
 
+import android.content.Intent
+import android.net.Uri
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
+import android.view.Menu
+import android.view.MenuInflater
+import android.view.MenuItem
 import android.widget.Toast
+import androidx.core.view.MenuProvider
 import com.nunes.dolarhoje.databinding.ActivityMainBinding
 import kotlinx.coroutines.*
 import org.jsoup.Jsoup
@@ -19,6 +25,8 @@ class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(binding.root)
+
+        iniciarMenu()
 
        job = CoroutineScope(Dispatchers.IO).launch {
            dolarHoje = webScraping()
@@ -101,6 +109,26 @@ class MainActivity : AppCompatActivity() {
             }
         )
 
+    }
+
+    private fun iniciarMenu() {
+      addMenuProvider(
+          object :MenuProvider{
+              override fun onCreateMenu(menu: Menu, menuInflater: MenuInflater) {
+                  menuInflater.inflate(R.menu.menu_principal, menu)
+              }
+
+              override fun onMenuItemSelected(menuItem: MenuItem): Boolean {
+                  if (menuItem.itemId == R.id.sobre) {
+                      val url = "https://github.com/nunes-tech/DolarHoje"
+                      val intent = Intent( Intent.ACTION_VIEW, Uri.parse(url))
+                      startActivity(intent)
+                  }
+                  return true
+              }
+
+          }
+      )
     }
 
     private suspend fun webScraping(): Double {
