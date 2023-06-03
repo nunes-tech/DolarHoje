@@ -110,7 +110,7 @@ class MainActivity : AppCompatActivity() {
 
         val valorDolar = document.select("input#nacional").attr("value")
         val dolarDouble = valorDolar.replace(",", ".").toDouble()
-        binding.editTextReal.hint = dolarDouble.toString()
+        binding.editTextReal.hint = "R$ " + dolarDouble.toString()
 
         return  dolarDouble
     }
