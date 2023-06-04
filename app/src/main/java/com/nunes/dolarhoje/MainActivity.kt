@@ -54,6 +54,7 @@ class MainActivity : AppCompatActivity() {
                                 val qtdDolarDigitado = s.toString().toDouble()
                                 val resultado = dolarHoje!! * qtdDolarDigitado
                                 val resultadoFormatado = String.format("%.2f", resultado)
+                                binding.editTextReal.text.clear()
                                 binding.editTextReal.hint = "R$ " + resultadoFormatado
                             } else {
                                 binding.editTextReal.hint = "R$ " + dolarHoje.toString()
@@ -94,6 +95,7 @@ class MainActivity : AppCompatActivity() {
                                 val qtdRealDigitado = s.toString().toDouble()
                                 val resultado = valoReal!! * qtdRealDigitado
                                 val resultadoFormatado = String.format("%.2f", resultado)
+                                binding.editTextDolar.text.clear()
                                 binding.editTextDolar.hint = "USD " + resultadoFormatado
                             } else {
                                 binding.editTextDolar.hint = "USD 1.0"
